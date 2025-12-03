@@ -1,0 +1,270 @@
+
+/* segunda parte */
+.section-next {
+  position: relative;
+  z-index: 50;
+  overflow: hidden;
+  /* opacity: 0.8; */
+  width: 100%;
+  height: 100vh;
+  background-color: #061513ee;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.section-inner {
+  width: 100%;
+  max-width: 1400px;
+  height: 100%;
+  padding: 0 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+
+.scroll-content-wrapper {
+  display: flex;
+  width: 100%;
+  gap: 30px;
+  max-width: 100%;
+  margin: 0 auto;
+  /* importante: altura = número de blocos * 100vh */
+  min-height: calc(var(--num-blocks, 4) * 100vh);
+  padding-top: 10vh;
+  padding-bottom: 10vh;
+  position: relative;
+}
+
+/* Coluna da imagem - agora é sticky DENTRO do scroll-content-wrapper */
+.image-column {
+  flex: 0.9;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.image-wrapper {
+  width: 100%;
+  height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;  
+  position: relative;
+}
+
+.image-wrapper img {
+    border-radius: 16px;
+}
+
+
+.scroll-image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 100%;
+  width: auto;
+  object-fit: contain;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out, transform 0.6s ease;
+}
+
+.scroll-image.active { 
+  opacity: 1; 
+  transform: translate(-50%, -50%) scale(1.02); 
+}
+
+
+/* Coluna do texto */
+.text-column {
+  flex: 1;
+  display: block;           
+  position: relative;       
+  min-height: 100vh;
+}
+
+.text-block { 
+    position: absolute; 
+    top: 55%; 
+    left: 0; 
+    width: 100%; 
+    transform: translateY(-50%) translateY(12px);  
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+    padding-left: 20px; 
+    padding-right: 20px; 
+    opacity: 0; 
+    transition: opacity 0.45s ease, transform 0.45s ease; 
+    pointer-events: none;  
+}
+
+.text-block.active {
+  opacity: 1;
+  transform: translateY(-50%) translateY(0);
+  pointer-events: auto;
+}
+
+.text-block span { 
+  font-size: 1.1em; 
+  font-weight: 500; 
+  color: #F0C460; 
+  margin-bottom: 10px; 
+}
+.text-block h2 { 
+  font-size: 3.2em; 
+  margin-bottom: 20px; 
+  line-height: 1.1; 
+  font-family: 'Times New Roman', Times, sans-serif;
+  font-weight: 600;
+  color: #e2e3e2; 
+}
+.text-block p  { 
+  font-size: 1.3em; 
+  line-height: 1.7; 
+  font-family: 'Sora', sans-serif;
+  color: #cecece; 
+  max-width: 700px; 
+}
+
+.text-block a {
+    color: #F0C460;
+    font-size: 1.1em; 
+    font-weight: 500; 
+    cursor: pointer;
+}
+
+/* laptops médios */
+@media (max-width: 1280px) {
+  .title-item {
+    font-size: 26px;
+
+  }
+
+  .btn-know {
+    width: 100%;
+
+  }
+}
+
+
+/* tablets */
+@media (max-width: 900px) { 
+
+  .section-inner {
+    height: auto;
+    padding: 80px 40px;
+    display: grid;
+    grid-template-columns: 1fr; 
+    grid-template-rows: auto auto auto;
+    row-gap: 60px;
+
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+  }
+
+  .btn-know {
+    width: 60%;
+    height: 50px;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .scroll-image {
+    left: 70%;
+  }
+
+  .text-block {
+    top: 59%;
+  
+   
+    border-radius: 5%;
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+
+    width: 100%;
+    padding: 20px 22px;
+  
+  }
+
+  
+  .text-block h2 {
+    font-size: 1.9em;
+    line-height: 1.2;
+  }
+
+  .text-block p {
+    font-size: 1.05em;
+    max-width: 100%;
+  }
+
+  .text-block span {
+    font-size: 0.9em;
+  }
+}
+
+/* mobile pequeno */
+@media (max-width: 480px) {
+  .section-next {
+    height: 800px;
+  }
+
+  .section-inner {
+     padding: 4px;
+  }
+ }
+
+@media (max-width: 425px) {
+  .scroll-image {
+    left: 115%;
+  }
+  .text-block {
+    top: 60%;
+    left: -110%;
+  
+    border-radius: 5%;
+    background: rgba(0, 0, 0, 0.297);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+
+    width: 450px;
+  }
+
+  .text-block p {
+    font-size: 1em;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 320px) {
+  .scroll-image {
+    left: 115%;
+  }
+  .text-block {
+    top: 60%;
+    left: -113%;
+    border-radius: 5%;
+    background: rgba(0, 0, 0, 0.297);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    width: 320px;
+  }
+
+  .text-block p {
+    display: none;
+    font-size: 1em;
+    max-width: 100%;
+  }
+}

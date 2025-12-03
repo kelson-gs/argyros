@@ -1,0 +1,174 @@
+
+/* sobre */
+.about {
+  position: relative;
+  z-index: 55;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  background-color: #061513ee;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* .name-company{
+    color: #F0C460
+} */
+
+.about-initial {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 150px;
+}
+
+.about-initial h1 {
+    font-family: 'Shrikhand', serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 96px;
+    /* color: #F0C460; */
+    color: #668074
+
+}
+
+.about-2 {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.about-2 p {
+    display: block;                /* inline-block atrapalha a quebra */
+    font-family: 'Sora', sans-serif;
+    font-weight: 600;
+    font-size: 44px;
+    color: #061513;
+    padding: 28px;
+    text-align: justify;
+
+    line-height: 1.25;             /* deixa mais bonito */
+    word-break: break-word;        /* quebra sem destruir layout */
+    overflow-wrap: break-word;     /* fallback moderno */
+    hyphens: manual;                 /* quebra com hífen natural */
+}
+
+.star1 {
+    width: 100px;
+    height: 100px;
+}
+
+.star2 {
+    align-self: flex-end;
+}
+
+/* tela plus size */
+@media (max-width: 2560px) {
+.about {
+    height: 950px;
+  }
+}
+
+/* laptops médios */
+@media (max-width: 1280px) {
+  .about-initial h1 {
+    font-size: 76px;
+  }
+
+  .about-2 p{
+    font-size: 28px;
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+}
+
+/* tablets */
+@media (max-width: 900px) {
+  .about-initial h1 {
+    font-size: 66px;
+  }
+
+  .about-2 p{
+    font-size: 36px;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  .star{
+    padding-right: 10px;
+  }
+}
+
+/* mobile grande */
+@media (max-width: 770px) {
+  .about-initial h1 {
+    font-size: 55px;
+  }
+
+  .star1 {
+    width: 50px;
+    height: 50px;
+  }
+  .star2 {
+    width: 50px;
+    height: 50px;
+    align-self: flex-end;
+  }
+
+  .about-2 p{
+    font-size: 36px;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+
+/* mobile pequeno */
+@media (max-width: 480px) {
+  .about {
+    height: 905px;
+  }
+
+  .about-initial {
+    margin-top: 50px;
+  }
+  .about-initial h1{
+    font-size: 40px;
+    text-align: center;
+  }
+
+  .about-2 p{
+    font-size: 16px;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+ }
+
+
+ /* mini devices (iphone antigo) */
+@media (max-width: 390px) {
+    .about {
+    height: 750px;
+  }
+
+  .about-initial h1 {
+    padding-top: 30px;
+  }
+
+  .about-2 p{
+    font-size: 20px;
+  }
+ }
+
+ @media (max-width: 360px) {
+    .about {
+        height: 685px;
+        padding: 5px;
+    }
+
+    .about-initial h1 {
+        padding-top: -10px;
+    }
+ }

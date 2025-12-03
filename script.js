@@ -4,12 +4,14 @@ const hamburger = document.querySelector(".hamburger");
 const menu = document.querySelector(".menu");
 const overlay = document.querySelector(".menu-overlay");
 
+console.log(window.innerWidth)
+
 gsap.set(".title, .subtitle", { force3D: true });
 
 function toggleMenu() {
-    hamburger.classList.toggle("active");
-    menu.classList.toggle("active");
-    overlay.classList.toggle("active");
+  hamburger.classList.toggle("active");
+  menu.classList.toggle("active");
+  overlay.classList.toggle("active");
 }
 
 hamburger.addEventListener("click", toggleMenu);
@@ -35,12 +37,33 @@ function sizeX() {
 
 function sizePhone() {
   const h = window.innerHeight;
+  const w = window.innerWidth;
 
-  return "+=" + h * 2.05;
+  if (w <= 425) {
+    return "+=" + h * 3.55;  
+  }
+
+  if (w <= 768) {
+    return "+=" + h * 4;  
+  }
+
+  if (w === 1024) {
+    return "+=" + h * 4;  
+  }
+
+  if (w === 1440) {
+    return "+=" + h * 4;  
+  }
+
+  if (w >= 2560 ){
+    return "+=" + h * 3;  
+  }
+
+  return "+=" + h * 3.34;
 }
 
-function sizeXHome () {
-  if(window.innerWidth < 380) {
+function sizeXHome() {
+  if (window.innerWidth < 380) {
     return 10;
   }
 
@@ -116,29 +139,34 @@ intro.eventCallback("onComplete", () => {
       pin: true,
       pinSpacing: false,
       anticipatePin: 1,
-      
+
     }
   });
 
   // animações da home (mantive suas valores)
-  scrollTl.to(".home .bg", { 
-    x: sizeXHome(), 
-    scale: 8, 
-    ease: "none" }, 0);
+  scrollTl.to(".home .bg", {
+    x: sizeXHome(),
+    scale: 8,
+    ease: "none"
+  }, 0);
   scrollTl.to(".btn-meet", { opacity: 0, y: 50, ease: "none" }, 0);
-  scrollTl.to(".title", { 
-    scale: 8, 
-    x: sizeX(), 
-    ease: "none" }, 0);
-  scrollTl.to(".subtitle", { 
-    scale: 8, 
-    x: sizeX(), 
-    ease: "none" }, 0);
+  scrollTl.to(".title", {
+    scale: 8,
+    x: sizeX(),
+    opacity: 0.4,
+    ease: "none"
+  }, 0);
+  scrollTl.to(".subtitle", {
+    scale: 8,
+    x: sizeX(),
+    opacity: 0.1,
+    ease: "none"
+  }, 0);
 
   // takeover: faz section-inner crescer SOBRE a home (usa translateY + scale + opacity)
   // 0.35 é o ponto da timeline onde começa; ajuste se quiser mais cedo/tarde
-  scrollTl.to(".section-inner", {
-    opacity: 1,
+  scrollTl.from(".section-inner", {
+    opacity: 0,
     y: 0,
     scale: 1,
     ease: "power3.out",
@@ -148,16 +176,80 @@ intro.eventCallback("onComplete", () => {
     }
   }, 0.01);
 
-  // opcional: anima itens internos para dar profundidade
-  scrollTl.fromTo(
-    [".section-inner .description", ".section-inner .viewport-3d", ".section-inner .nav-3d"],
-    { y: 20, opacity: 0.8 },
-    { y: 0, opacity: 1, stagger: 0.08, duration: 0.6, ease: "power2.out" },
-    0.4
-  );
-
-ScrollTrigger.refresh();
 });
+
+// =========================================================
+//  CATÁLOGO  —  1 ScrollTrigger + 1 Timeline
+// =========================================================
+const scrollSectionContainer = document.querySelector(".section-next");
+const scrollImages = gsap.utils.toArray(".scroll-image");
+const textBlocks = gsap.utils.toArray(".text-block");
+const numBlocks = textBlocks.length;
+
+// estado inicial limpo
+scrollImages.forEach(im => gsap.set(im, { opacity: 0 }));
+textBlocks.forEach(tb => gsap.set(tb, { opacity: 0 }));
+
+// PRIMEIRO item visível desde o início
+gsap.set(scrollImages[0], { opacity: 1 });
+gsap.set(textBlocks[0], { opacity: 1 });
+
+// CONFIGURAÇÕES (estas aqui foram calibradas à mão)
+const stepDuration = 1.0;       // fade-in e fade-out mais longos
+const betweenSteps = 2.0;       // quanto scroll precisa para trocar
+const endDistance = numBlocks * 350;  // espaço total de scroll (bem longo)
+const scrubSpeed = 1.2;
+
+let tl = gsap.timeline({
+  scrollTrigger: {
+    trigger: scrollSectionContainer,
+    start: "top top",
+    end: `+=${endDistance}vh`,
+    scrub: scrubSpeed,
+    pin: true,
+    pinSpacing: true,
+    anticipatePin: 1,
+    // markers: true,
+  }
+});
+
+// -----------------------------------------------------
+// SYSTEM PERFEITO DE TROCA SUAVE (Apple/Tesla level)
+// -----------------------------------------------------
+for (let i = 1; i < numBlocks; i++) {
+
+  // 1) espaço de scroll antes da troca
+  tl.to({}, { duration: betweenSteps });
+
+  // 2) crossfade (fade-out do anterior + fade-in do novo)
+  tl.to(scrollImages[i - 1], {
+    opacity: 0,
+    
+    duration: stepDuration,
+    ease: "power2.out"
+  });
+
+  tl.to(textBlocks[i - 1], {
+    opacity: 0,
+    duration: stepDuration,
+    ease: "power2.out"
+  }, "<");
+
+  tl.to(scrollImages[i], {
+    opacity: 1,
+    duration: stepDuration + 0.2,
+    ease: "power3.out"
+  }, "<");
+
+  tl.to(textBlocks[i], {
+    opacity: 1,
+    duration: stepDuration + 0.3,
+    ease: "power3.out"
+  }, "<");
+}
+
+// fimzinho só pra suavizar
+tl.to({}, { duration: 1 });
 
 const split = new SplitText(".text-about", { type: "chars" });
 
@@ -171,10 +263,19 @@ const aboutTL = gsap.timeline({
 })
 
 aboutTL
+  .to(".about", {
+    backgroundColor:" #061513ff",
+    duration: 0.8,
+    ease: "none"
+  })
   .from(".about-initial", {
     opacity: 0,
     y: -300,
   }, '-=2')
+  .to(".name-company", {
+    color: "#F0C460",
+    durarion: 0.1
+  }, 0)
   .from(".star1", {
     opacity: 0,
     // duration: 0.5
