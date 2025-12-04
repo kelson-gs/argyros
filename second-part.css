@@ -131,6 +131,7 @@
   font-size: 1.3em; 
   line-height: 1.7; 
   font-family: 'Sora', sans-serif;
+  font-weight: 600;
   color: #cecece; 
   max-width: 700px; 
 }
@@ -152,6 +153,23 @@
   .btn-know {
     width: 100%;
 
+  }
+}
+
+
+@media (max-width: 1024px) {
+  .text-block {
+    top: 58%;
+  
+   
+    border-radius: 5%;
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+
+    
+    padding: 20px 22px;
+  
   }
 }
 
@@ -198,7 +216,6 @@
     padding: 20px 22px;
   
   }
-
   
   .text-block h2 {
     font-size: 1.9em;
@@ -227,16 +244,21 @@
  }
 
 @media (max-width: 425px) {
+  /* .section-inner {
+    height: 100vh;
+  } */
+
   .scroll-image {
     left: 115%;
   }
+
   .text-block {
     top: 60%;
     left: -110%;
   
     border-radius: 5%;
-    background: rgba(0, 0, 0, 0.297);
-    backdrop-filter: blur(14px);
+    background: rgba(0, 0, 0, 0.474);
+    backdrop-filter: blur(24px);
     -webkit-backdrop-filter: blur(14px);
 
     width: 450px;
@@ -245,6 +267,15 @@
   .text-block p {
     font-size: 1em;
     max-width: 100%;
+  }
+}
+
+@media (max-width: 375px) {
+  .text-block {
+    padding: 28px;
+  }
+  .text-block p {
+    display: none;
   }
 }
 

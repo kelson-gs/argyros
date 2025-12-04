@@ -39,16 +39,20 @@ function sizePhone() {
   const h = window.innerHeight;
   const w = window.innerWidth;
 
+  if (w <= 375) {
+    return "+=" + h * 3.30;  
+  }
+
   if (w <= 425) {
     return "+=" + h * 3.55;  
   }
 
   if (w <= 768) {
-    return "+=" + h * 4;  
+    return "+=" + h * 3.50;  
   }
 
   if (w === 1024) {
-    return "+=" + h * 4;  
+    return "+=" + h * 3;  
   }
 
   if (w === 1440) {
@@ -73,6 +77,15 @@ function sizeXHome() {
 function scaleHome() {
   return window.innerWidth < 480 ? 2 : 8;
 }
+
+function btnMeetLogic() {
+    let w = window.innerWidth;
+    if(w <= 320) {
+      return -500;
+    }
+    return 50
+}
+
 
 function createRippleEffect(button) {
   button.addEventListener("mousemove", e => {
@@ -143,13 +156,15 @@ intro.eventCallback("onComplete", () => {
     }
   });
 
+  
+
   // animações da home (mantive suas valores)
   scrollTl.to(".home .bg", {
     x: sizeXHome(),
     scale: 8,
     ease: "none"
   }, 0);
-  scrollTl.to(".btn-meet", { opacity: 0, y: 50, ease: "none" }, 0);
+  scrollTl.to(".btn-meet", { opacity: 0, y: btnMeetLogic(), ease: "none" }, 0);
   scrollTl.to(".title", {
     scale: 8,
     x: sizeX(),

@@ -33,7 +33,8 @@ body {
     position: absolute;
     inset: 0;
     z-index: 0;
-    background-image: url("assets/original_eric.png");
+    /* background-image: url("assets/original_eric.png"); */
+    background-image: url("assets/original_eric-Photoroom.png");
     background-size: cover;
     background-position: top center;
     background-repeat: no-repeat;
@@ -419,9 +420,9 @@ body {
 
 /* mobile pequeno */
 @media (max-width: 480px) {
-    .home .bg {
+    /* .home .bg {
         background-image: url("assets/original-800.png");
-    }
+    } */
    /* esconde tudo exceto menu móvel e hamburger */
   .navigation > div:not(.hamburger):not(.menu) {
     display: none !important;
@@ -503,7 +504,7 @@ body {
 /* mini devices (iphone antigo) */
 @media (max-width: 390px) {
   .home .bg {
-    background-image: url("assets/original-800.png");
+    background-position: top 80%;
   }
   .title {
     width: 250px;
@@ -523,6 +524,17 @@ body {
   .navigation div {
     gap: 10px;
     font-size: 14px;
+  }
+
+}
+
+@media (max-width: 375px) {
+  .home .bg {
+    background-position-x: 60%;
+  }
+
+  .contain-home-text {
+     padding: 450px 30px;
   }
 
 }
